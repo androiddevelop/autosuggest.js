@@ -40,14 +40,14 @@
 
 #### method(非必须):
 
-请求方式(get, post), 默认get
+请求方式(`get`, `post`), 默认`get`
 
 #### queryParamName(非必须):
 
 传递当前输入框的值时的参数名称,默认query,即如果是get方式并保持该值为默认值,则请求url为xxx.com?query=input_value,如果设置此值为search,则url为xxx.com?search=input_value
  
 #### align(非必须):
-对齐方式,默认左对齐,可选项 'left','center','right';
+对齐方式,默认左对齐,可选项 `left` , `center` , `right`;
 
 #### wrapperClass(非必须):
 
@@ -96,4 +96,5 @@
             });
 
 
-又任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流
+
+有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流
