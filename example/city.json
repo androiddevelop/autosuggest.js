@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "label": "beijing"
+  },
+  {
+    "id": 2,
+    "label": "shanghai"
+  },
+  {
+    "id": 3,
+    "label": "hangzhou"
+  },
+  {
+    "id": 4,
+    "label": "guangzhou"
+  },
+  {
+    "id": 5,
+    "label": "zhengzhou"
+  },
+  {
+    "id": 6,
+    "label": "shenzhen"
+  },
+  {
+    "id": 7,
+    "label": "hefei"
+  },
+  {
+    "id": 8,
+    "label": "suzhou"
+  },
+  {
+    "id": 9,
+    "label": "nanjing"
+  },
+  {
+    "id": 10,
+    "label": "wuxi"
+  },
+  {
+    "id": 11,
+    "label": "ningxia"
+  },
+  {
+    "id": 12,
+    "label": "heilongjiang"
+  },
+  {
+    "id": 13,
+    "label": "dalian"
+  },
+  {
+    "id": 14,
+    "label": "wuxi"
+  },
+  {
+    "id": 15,
+    "label": "qinghai"
+  },
+  {
+    "id": 16,
+    "label": "xian"
+  }
+]
