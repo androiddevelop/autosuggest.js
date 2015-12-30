@@ -1,9 +1,9 @@
 /*
  * @name jQuery.auto-suggest
- * @projectDescription Lightweight AJAX auto-suggest for Bootstrap 3
+ * @projectDescription AJAX auto-suggest for Bootstrap 3
  * @author  | https://github.com/androiddevelop/auto-suggest
  * @version 1.0
- * @license MIT License
+ * @license Apache License
  *
  */
 (function ($) {
