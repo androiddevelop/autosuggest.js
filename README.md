@@ -9,6 +9,7 @@
 3. **增加键盘方向键选择**
 4. **增加文本对齐选择(align)**
 5. **增加回车触发函数(nextStep)**
+6. **增加以分隔符分割的联想(split)**
 
 ### 依赖
 
@@ -29,14 +30,15 @@
       }
 	]
 
+
 > 如果服务端返回数据非此种格式，请修改。
->
+
 
 ### 参数
 
 #### url: 
 
-提交url,注意跨域问题
+提交请求地址, 可以是json文件，注意跨域问题
 
 #### method(非必须):
 
@@ -44,10 +46,10 @@
 
 #### queryParamName(非必须):
 
-传递当前输入框的值时的参数名称,默认query,即如果是get方式并保持该值为默认值,则请求url为xxx.com?query=input_value,如果设置此值为search,则url为xxx.com?search=input_value
+传递当前输入框的值时的参数名称,默认 `query`,即如果是get方式并保持该值为默认值,则请求url为 `xxx.com?query=input_value` ,如果设置此值为 `search` ,则url为 `xxx.com?search=input_value`
  
 #### align(非必须):
-对齐方式,默认左对齐,可选项 `left` , `center` , `right`;
+对齐方式,默认左对齐,可选项 `left` , `center` , `right`
 
 #### wrapperClass(非必须):
 
@@ -59,15 +61,18 @@
 
 #### minLength(非必须):
 
-发起请求的最小长度，只有>= 此长度时才会出现建议框,默认最小长度为2
+发起请求的最小长度，只有>= 此长度时才会出现建议框,默认最小长度为 `2`
 
 #### maxNum(非必须):
 
-最大建议数目,默认最多给出10个建议提示
+最大建议数目,默认最多给出 `10` 个建议提示
+
+#### split(非必须):
+分隔符, 例如我们需要文本框中输入多个省份,使用逗号分开,那么我们可以设定 `split` 为 `,` , 之后 `autosuggest.js` 会根据最后一个逗号后面的内容进行建议.  默认为 `null` ，即把文本框中所有输入视为一个文本进行建议.
 
 #### nextStep(非必须):
 
-选中建议词后,建议框消失,之后点击回车要执行的函数
+选中建议词后,建议框消失,之后点击回车要执行的函数。
 
 #### extra(非必须): 
 
@@ -77,24 +82,31 @@
 	 "key2" : "value2"
 	   
 ### 例子
-    
-      $("#test").autosuggest({
-                url: 'city.json',
-                minLength: 1,
-                maxNum: 3,
-                align: 'center',
-                queryParamName: 'search'
-                method: 'post',
-                queryParamName: 'search',
-                extra: {
-                    "key1": "value1",
-                    "key2": "value2"
-                },
-                nextStep: function(){
-                    alert("test");
-                }
-            });
 
+    //简单实例
+    $("#test").autosuggest({
+        url: 'city.json',
+        queryParamName: 'search',
+    });
+    
+    //复杂实例
+    $("#test").autosuggest({
+        url: 'city.json',
+        minLength: 1,
+        maxNum: 3,
+        align: 'center',
+        queryParamName: 'search'
+        method: 'post',
+        queryParamName: 'search',
+        extra: {
+            "key1": "value1",
+            "key2": "value2"
+        },
+        nextStep: function () {
+            alert("test");
+        },
+        split: ' '
+    });
 
 
 有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流
