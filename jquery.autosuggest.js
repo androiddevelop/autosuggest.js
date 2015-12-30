@@ -48,6 +48,10 @@
                 }
 
                 var query = $(that).val();
+                if(query == null || query.length == 0){
+                    return ;
+                }
+
                 //处理分隔符,分隔符为最后一个字符时,隐藏建议框
                 if (settings.split != null && query.charAt(query.length - 1) == settings.split) {
                     $(that).next('.' + settings.menuClass).html('');
