@@ -1,5 +1,5 @@
 .as-wrapper {
-    position: relative;
+    position: inherit;
 }
 
 .as-wrapper .as-menu {
