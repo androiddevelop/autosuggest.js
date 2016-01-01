@@ -8,8 +8,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="../autosuggest.min.css">
-    <script src="../jquery.autosuggest.min.js"></script>
+    <link rel="stylesheet" href="../autosuggest.css">
+    <script src="../jquery.autosuggest.js"></script>
 
 </head>
 <body style="padding-top: 10px;">
@@ -31,11 +31,12 @@
             maxNum: 3,
             align: 'center',
             method: 'post',
+            highlight: true,
             queryParamName: 'city',
             nextStep: function () {
                 alert("hello world!");
             },
-            split: ','
+            split: ' '
         });
 
         $("#t2").autosuggest({

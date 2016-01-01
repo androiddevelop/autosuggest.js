@@ -18,6 +18,7 @@
                 align: "left",
                 queryParamName: 'query',
                 split: null,
+                highlight: false,
                 extra: {},
                 nextStep: null
             };
@@ -76,12 +77,7 @@
                 var queryName = settings.queryParamName;
 
                 //是否进行多词提示
-                if (settings.split != null) {
-                    var index = query.lastIndexOf(settings.split);
-                    if (index != -1) {
-                        query = query.substring(index + settings.split.length);
-                    }
-                }
+                query = getRealQuery(query);
 
                 var data = {};
                 data[queryName] = query;
@@ -114,8 +110,14 @@
 
                             $.each(json, function (i, j) {
                                 if (settings.maxNum > i) {
-                                    results += '<span href="#" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-label="'
-                                        + j.label + '">' + j.label + '</span>';
+                                    if (settings.highlight) {
+                                        var matchText = getRealQuery(query);
+                                        results += '<span href="#" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-label="'
+                                            + j.label + '">' + getStrongText(j.label, matchText) + '</span>';
+                                    } else {
+                                        results += '<span href="#" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-label="'
+                                            + j.label + '">' + j.label + '</span>';
+                                    }
                                     suggestionsNum++;
                                 }
                             });
@@ -212,6 +214,36 @@
                 if (index != -1) {
                     result = query.substring(0, index) + settings.split + selectedValue;
                 }
+                return result;
+            }
+
+            //获取真实查询内容
+            function getRealQuery(query) {
+                if (settings.split != null) {
+                    var index = query.lastIndexOf(settings.split);
+                    if (index != -1) {
+                        query = query.substring(index + settings.split.length);
+                    }
+                }
+                return query;
+            }
+
+            //对文本加入高亮操作
+            function getStrongText(text, matchText) {
+                var searchStartPosition = 0;
+                var textTmp = text;
+                var matchTextTmp = matchText;
+                var result = "";
+                var length = matchText.length;
+                text = text.toLowerCase();
+                matchText = matchText.toLowerCase();
+                var index = text.indexOf(matchText, searchStartPosition);
+                while (index != -1) {
+                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + matchTextTmp + "</strong>";
+                    searchStartPosition = index + length;
+                    index = textTmp.indexOf(matchText, searchStartPosition);
+                }
+                result = result + textTmp.substring(searchStartPosition);
                 return result;
             }
 
