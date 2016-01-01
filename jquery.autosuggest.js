@@ -48,8 +48,8 @@
                 }
 
                 var query = $(that).val();
-                if(query == null || query.length == 0){
-                    return ;
+                if (query == null || query.length == 0) {
+                    return;
                 }
 
                 //处理分隔符,分隔符为最后一个字符时,隐藏建议框
@@ -114,8 +114,8 @@
 
                             $.each(json, function (i, j) {
                                 if (settings.maxNum > i) {
-                                    results += '<a href="#" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-label="'
-                                        + j.label + '">' + j.label + '</a>';
+                                    results += '<span href="#" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-label="'
+                                        + j.label + '">' + j.label + '</span>';
                                     suggestionsNum++;
                                 }
                             });
@@ -134,7 +134,7 @@
                             $(that).keydown(function (event) {
                                 var keyCode = event.keyCode;
 
-                                if ($(that).next().css("display") == 'none' && keyCode != 13) {
+                                if ($(that).next('.' + settings.menuClass).css("display") == 'none' && keyCode != 13) {
                                     return;
                                 }
 
@@ -142,9 +142,10 @@
                                 if (keyCode == 38) {
                                     $(".as-selected").removeClass("as-selected");
                                     selectIndex = (selectIndex + suggestionsNum - 1) % suggestionsNum;
-                                    $(that).next().children().eq(selectIndex).addClass("as-selected");
+                                    $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
                                     upDownOperate = true;
 
+                                    //阻止光标移至输入框最前面
                                     event.preventDefault();
                                     return;
                                 }
@@ -153,7 +154,7 @@
                                 if (keyCode == 40) {
                                     $(".as-selected").removeClass("as-selected");
                                     selectIndex = (selectIndex + 1) % suggestionsNum;
-                                    $(that).next().children().eq(selectIndex).addClass("as-selected");
+                                    $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
                                     upDownOperate = true;
                                     return;
                                 }
@@ -174,6 +175,15 @@
                                         }
                                     }
                                 }
+                            });
+
+                            //鼠标悬浮事件
+                            $(that).next('.' + settings.menuClass).children().each(function (index) {
+                                $(this).on("mouseenter", function () {
+                                    $(".as-selected").removeClass("as-selected");
+                                    $(this).addClass("as-selected");
+                                    selectIndex = index;
+                                });
                             });
                         }
                     });
