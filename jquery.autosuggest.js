@@ -232,14 +232,13 @@
             function getStrongText(text, matchText) {
                 var searchStartPosition = 0;
                 var textTmp = text;
-                var matchTextTmp = matchText;
                 var result = "";
                 var length = matchText.length;
                 text = text.toLowerCase();
                 matchText = matchText.toLowerCase();
                 var index = text.indexOf(matchText, searchStartPosition);
                 while (index != -1) {
-                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + matchTextTmp + "</strong>";
+                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
                     searchStartPosition = index + length;
                     index = textTmp.indexOf(matchText, searchStartPosition);
                 }
