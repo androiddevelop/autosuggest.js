@@ -75,6 +75,12 @@
 #### split(非必须):
 分隔符, 例如我们需要文本框中输入多个省份,使用逗号分开,那么我们可以设定 `split` 为 `,` , 之后 `autosuggest.js` 会根据最后一个逗号后面的内容进行建议.  默认为 `null` ，即把文本框中所有输入视为一个文本进行建议.
 
+#### open(非必须):
+建议框由隐藏状态变为可见状态时的回调,默认null
+
+#### close(非必须):
+建议框由可见状态变为隐藏状态时的回调,默认null
+
 #### nextStep(非必须):
 
 选中建议词后,建议框消失,之后点击回车要执行的函数。
@@ -102,6 +108,7 @@
         align: 'center',
         queryParamName: 'search'
         method: 'post',
+        highlight: true,
         queryParamName: 'search',
         extra: {
             "key1": "value1",
@@ -110,7 +117,13 @@
         nextStep: function () {
             alert("test");
         },
-        split: ' '
+        split: ' ',
+        open: function(){
+            console.log("start open");
+        },
+        close: function(){
+            console.log("start close");
+        }
     });
 
 
