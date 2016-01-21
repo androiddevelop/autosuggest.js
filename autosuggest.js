@@ -22,7 +22,8 @@
                 extra: {},
                 nextStep: null,
                 open: null,
-                close: null
+                close: null,
+                immediate: false
             };
 
             var settings = $.extend({}, defaults, options);
@@ -44,15 +45,21 @@
 
             $(".as-menu").css("top", $(this).outerHeight());
 
-            $(this).on("keyup", function (event) {
-                var keyCode = event.keyCode;
+            var lastText = "";
 
-                //方向键与空格按下时不发送联想查询
-                if ((keyCode >= 37 && keyCode <= 40) || keyCode == 13) {
+            var lock = false;
+
+            setInterval(checkInput, 200);
+
+            //检测输入
+            function checkInput() {
+                var query = $(that).val();
+                if (lock || query == lastText) {
                     return;
                 }
 
-                var query = $(that).val();
+                lastText = query;
+
                 if (query == null || query.length == 0) {
                     close($(that).next('.' + settings.menuClass));
                     return;
@@ -60,17 +67,18 @@
 
                 if (query.length < settings.minLength) {
                     close($(that).next('.' + settings.menuClass));
+                    return;
                 }
 
                 //处理分隔符,分隔符为最后一个字符时,隐藏建议框
                 if (settings.split != null && query.charAt(query.length - 1) == settings.split) {
                     $(that).next('.' + settings.menuClass).html('');
                     close($(that).next('.' + settings.menuClass));
-                    return;
                 }
 
                 searchQuery();
-            });
+
+            }
 
             //hide auto-suggest component when lose focus
             $(this).blur(function () {
@@ -139,6 +147,11 @@
                                 open($(that).next('.' + settings.menuClass));
                             }
 
+                            //close component when there is no data.
+                            if (suggestionsNum == 0 && $(that).next('.' + settings.menuClass).is(':visible') && settings.close != null) {
+                                close($(that).next('.' + settings.menuClass));
+                            }
+
                             $(that).unbind("keydown");
                             $(".as-selected").removeClass("as-selected");
                             var upDownOperate = false;  //has up or down operate
@@ -174,9 +187,17 @@
                                 if (keyCode == 13) {
                                     //suggestion component is visible after the operation up and down arrows
                                     if (upDownOperate) {
-                                        $(that).val(getRealText($(".as-selected").data('label')));
+                                        lock = true;
+                                        lastText = getRealText($(".as-selected").data('label'));
+                                        $(that).val(lastText);
+                                        lock = false;
                                         close($(that).next('.' + settings.menuClass));
-                                        upDownOperate = false;
+
+                                        if(settings.immediate && settings.nextStep!=null){
+                                            settings.nextStep();
+                                        }else {
+                                            upDownOperate = false;
+                                        }
                                     } else {
                                         if (settings.nextStep != null && $(that).val().length > 0) {
                                             close($(that).next('.' + settings.menuClass));
@@ -205,24 +226,32 @@
             function close(ele) {
                 if (ele.is(':visible') && settings.close != null) {
                     settings.close();
+                    ele.hide();
                 }
-                ele.hide();
             }
 
             //建议框打开
             function open(ele) {
                 if (!ele.is(':visible') && settings.open != null) {
                     settings.open();
+                    ele.show();
                 }
-                ele.show();
             }
 
 
             //do something after select menu
             function selectResult() {
-                $(that).val(getRealText($(this).data('label')));
+                lock = true;
+                lastText = getRealText($(this).data('label'));
+                $(that).val(lastText);
+                lock = false;
+
                 close($(that).next('.' + settings.menuClass));
                 $(that).focus();
+
+                if(settings.immediate && settings.nextStep!=null){
+                    settings.nextStep();
+                }
                 return false;
             }
 
