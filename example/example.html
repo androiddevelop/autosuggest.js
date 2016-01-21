@@ -12,7 +12,7 @@
     <script src="../autosuggest.js"></script>
 
 </head>
-<body style="padding-top: 10px;">
+<body style="padding-top: 30px;">
 <div class="form-group col-md-4 col-xs-10 col-md-offset-1 col-xs-offset-1">
     <input type="text" class="form-control" id="t1" placeholder="最短提示长度为1, 最多联想3个,请输入中国地名,例如'北京'"/>
 </div>
@@ -36,7 +36,13 @@
             nextStep: function () {
                 alert("hello world!");
             },
-            split: ' '
+            split: ' ',
+            open: function(){
+                console.log("start open");
+            },
+            close: function(){
+                console.log("start close");
+            }
         });
 
         $("#t2").autosuggest({

@@ -20,7 +20,9 @@
                 split: null,
                 highlight: false,
                 extra: {},
-                nextStep: null
+                nextStep: null,
+                open: null,
+                close: null
             };
 
             var settings = $.extend({}, defaults, options);
@@ -40,6 +42,8 @@
                 alignClass = ' as-align-right';
             }
 
+            $(".as-menu").css("top", $(this).outerHeight());
+
             $(this).on("keyup", function (event) {
                 var keyCode = event.keyCode;
 
@@ -50,13 +54,18 @@
 
                 var query = $(that).val();
                 if (query == null || query.length == 0) {
+                    close($(that).next('.' + settings.menuClass));
                     return;
+                }
+
+                if (query.length < settings.minLength) {
+                    close($(that).next('.' + settings.menuClass));
                 }
 
                 //处理分隔符,分隔符为最后一个字符时,隐藏建议框
                 if (settings.split != null && query.charAt(query.length - 1) == settings.split) {
                     $(that).next('.' + settings.menuClass).html('');
-                    $(that).next('.' + settings.menuClass).hide();
+                    close($(that).next('.' + settings.menuClass));
                     return;
                 }
 
@@ -66,7 +75,7 @@
             //hide auto-suggest component when lose focus
             $(this).blur(function () {
                 setTimeout(function () {
-                    $(that).next('.' + settings.menuClass).hide();
+                    close($(that).next('.' + settings.menuClass));
                 }, 200);
             });
 
@@ -88,7 +97,7 @@
 
                 if (!query) {
                     $(that).next('.' + settings.menuClass).html('');
-                    $(that).next('.' + settings.menuClass).hide();
+                    close($(that).next('.' + settings.menuClass));
                 }
 
                 if (query.length >= settings.minLength) {
@@ -127,7 +136,7 @@
 
                             //do not show when lose focus
                             if ($(that).is(":focus")) {
-                                $(that).next('.' + settings.menuClass).show();
+                                open($(that).next('.' + settings.menuClass));
                             }
 
                             $(that).unbind("keydown");
@@ -166,11 +175,11 @@
                                     //suggestion component is visible after the operation up and down arrows
                                     if (upDownOperate) {
                                         $(that).val(getRealText($(".as-selected").data('label')));
-                                        $(that).next('.' + settings.menuClass).hide();
+                                        close($(that).next('.' + settings.menuClass));
                                         upDownOperate = false;
                                     } else {
                                         if (settings.nextStep != null && $(that).val().length > 0) {
-                                            $(that).next('.' + settings.menuClass).hide();
+                                            close($(that).next('.' + settings.menuClass));
                                             settings.nextStep();
                                             //防止多余请求
                                             xhr.abort();
@@ -192,11 +201,27 @@
                 }
             }
 
+            //建议框关闭
+            function close(ele) {
+                if (ele.is(':visible') && settings.close != null) {
+                    settings.close();
+                }
+                ele.hide();
+            }
+
+            //建议框打开
+            function open(ele) {
+                if (!ele.is(':visible') && settings.open != null) {
+                    settings.open();
+                }
+                ele.show();
+            }
+
 
             //do something after select menu
             function selectResult() {
                 $(that).val(getRealText($(this).data('label')));
-                $(that).next('.' + settings.menuClass).hide();
+                close($(that).next('.' + settings.menuClass));
                 $(that).focus();
                 return false;
             }
