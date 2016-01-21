@@ -91,7 +91,7 @@
     //简单实例
     $("#test").autosuggest({
         url: 'city.json',
-        queryParamName: 'search',
+        queryParamName: 'search'
     });
     
     //复杂实例
