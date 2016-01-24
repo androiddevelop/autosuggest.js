@@ -36,20 +36,21 @@
             var xhr;
             var that = $(this);
 
-            var alignClass = ' as-align-left ';
+            var alignClass = ' as-align-left';
             if (settings.align == 'center') {
                 alignClass = ' as-align-center';
             } else if (settings.align == 'right') {
                 alignClass = ' as-align-right';
             }
 
-            $(".as-menu").css("top", $(this).outerHeight());
+            $(".as-menu").css("top", $(that).outerHeight());
 
             var lastText = "";
 
             var lock = false;
 
             setInterval(checkInput, 200);
+
 
             //检测输入
             function checkInput() {
@@ -60,20 +61,20 @@
 
                 lastText = query;
 
-                if (query == null || query.length == 0) {
-                    close($(that).next('.' + settings.menuClass));
+                if (query == null) {
+                    closeComponent($(that).next('.' + settings.menuClass));
                     return;
                 }
 
                 if (query.length < settings.minLength) {
-                    close($(that).next('.' + settings.menuClass));
+                    closeComponent($(that).next('.' + settings.menuClass));
                     return;
                 }
 
                 //处理分隔符,分隔符为最后一个字符时,隐藏建议框
                 if (settings.split != null && query.charAt(query.length - 1) == settings.split) {
                     $(that).next('.' + settings.menuClass).html('');
-                    close($(that).next('.' + settings.menuClass));
+                    closeComponent($(that).next('.' + settings.menuClass));
                 }
 
                 searchQuery();
@@ -83,7 +84,7 @@
             //hide auto-suggest component when lose focus
             $(this).blur(function () {
                 setTimeout(function () {
-                    close($(that).next('.' + settings.menuClass));
+                    closeComponent($(that).next('.' + settings.menuClass));
                 }, 200);
             });
 
@@ -105,7 +106,7 @@
 
                 if (!query) {
                     $(that).next('.' + settings.menuClass).html('');
-                    close($(that).next('.' + settings.menuClass));
+                    closeComponent($(that).next('.' + settings.menuClass));
                 }
 
                 if (query.length >= settings.minLength) {
@@ -144,12 +145,12 @@
 
                             //do not show when lose focus
                             if ($(that).is(":focus")) {
-                                open($(that).next('.' + settings.menuClass));
+                                openComponent($(that).next('.' + settings.menuClass));
                             }
 
                             //close component when there is no data.
                             if (suggestionsNum == 0 && $(that).next('.' + settings.menuClass).is(':visible') && settings.close != null) {
-                                close($(that).next('.' + settings.menuClass));
+                                closeComponent($(that).next('.' + settings.menuClass));
                             }
 
                             $(that).unbind("keydown");
@@ -191,16 +192,16 @@
                                         lastText = getRealText($(".as-selected").data('label'));
                                         $(that).val(lastText);
                                         lock = false;
-                                        close($(that).next('.' + settings.menuClass));
+                                        closeComponent($(that).next('.' + settings.menuClass));
 
-                                        if(settings.immediate && settings.nextStep!=null){
+                                        if (settings.immediate && settings.nextStep != null) {
                                             settings.nextStep();
-                                        }else {
+                                        } else {
                                             upDownOperate = false;
                                         }
                                     } else {
                                         if (settings.nextStep != null && $(that).val().length > 0) {
-                                            close($(that).next('.' + settings.menuClass));
+                                            closeComponent($(that).next('.' + settings.menuClass));
                                             settings.nextStep();
                                             //防止多余请求
                                             xhr.abort();
@@ -223,18 +224,22 @@
             }
 
             //建议框关闭
-            function close(ele) {
-                if (ele.is(':visible') && settings.close != null) {
-                    settings.close();
+            function closeComponent(ele) {
+                if (ele.is(':visible')) {
                     ele.hide();
+                    if (settings.close != null) {
+                        settings.close();
+                    }
                 }
             }
 
             //建议框打开
-            function open(ele) {
-                if (!ele.is(':visible') && settings.open != null) {
-                    settings.open();
+            function openComponent(ele) {
+                if (!ele.is(':visible')) {
                     ele.show();
+                    if (settings.open != null) {
+                        settings.open();
+                    }
                 }
             }
 
@@ -246,10 +251,10 @@
                 $(that).val(lastText);
                 lock = false;
 
-                close($(that).next('.' + settings.menuClass));
+                closeComponent($(that).next('.' + settings.menuClass));
                 $(that).focus();
 
-                if(settings.immediate && settings.nextStep!=null){
+                if (settings.immediate && settings.nextStep != null) {
                     settings.nextStep();
                 }
                 return false;
