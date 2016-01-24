@@ -32,6 +32,7 @@
             align: 'center',
             method: 'post',
             highlight: true,
+            immediate: true,
             queryParamName: 'city',
             nextStep: function () {
                 alert("hello world!");
@@ -47,7 +48,7 @@
 
         $("#t2").autosuggest({
             url: 'city.json',
-            method: 'POST',
+            method: 'post',
             queryParamName: 'city'
         });
     });
