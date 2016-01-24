@@ -32,6 +32,7 @@
 	]
 
 
+> id可以是任意值
 > 如果服务端返回数据非此种格式，请修改。
 
 
@@ -54,11 +55,11 @@
 
 #### wrapperClass(非必须):
 
-包围输入框外层div的css样式
+包围输入框外层div的css样式,见下面结构介绍
 
 #### menuClass(非必须):
 
-自动补全菜单的css样式，如果需要自定义请提供
+自动补全菜单的css样式，如果需要自定义请提供, 见下面结构介绍
 
 #### minLength(非必须):
 
@@ -89,7 +90,7 @@
 
 #### immediate(非必须)
 
-是否鼠标选中后或者键盘选中回车后立刻执行nextStep操作,默认 `false`
+是否鼠标选中后或者键盘选中回车后立刻执行nextStep操作, 默认 `false` ,即选中后,所选项将会填充到输入框中,需要再次回车执行nextStep操作
 
 #### extra(非必须): 
 
@@ -97,6 +98,25 @@
 
 	 "key1" : "value1",
 	 "key2" : "value2"
+	 
+### 结构
+
+##### 初始结构
+
+    <input type="text" class="form-control" id="text" placeholder="默认操作" autocomplete="off"/>
+   
+##### autosuggest作用后的结构
+
+    <div class="as-wrapper">
+        <input type="text" class="form-control" id="text" placeholder="默认操作" autocomplete="off"/>
+        <div class="as-menu list-group" style="display: none;">
+            <span href="#" class="list-group-item  as-align-left" data-id="1" data-label="beijing">beijing</span>
+            <span href="#" class="list-group-item  as-align-left" data-id="2" data-label="shanghai">shanghai</span>
+            <span href="#" class="list-group-item  as-align-left " data-id="3" data-label="hangzhou">hangzhou</span>
+            <span href="#" class="list-group-item  as-align-left " data-id="4" data-label="guangzhou">guangzhou</span>
+            <span href="#" class="list-group-item  as-align-left " data-id="5" data-label="zhengzhou">zhengzhou</span>
+        </div>
+    </div>
 	   
 ### 例子
 
