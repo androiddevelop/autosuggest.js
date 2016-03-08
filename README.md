@@ -49,12 +49,14 @@
 	[ 
 	  {
        "id" : someId, 
+       "value" : value,
        "label" : "some label name"
       }
 	]
 
 
 > id可以是任意值
+> label不是必须项,仅仅做个标示
 > 如果服务端返回数据非此种格式，请修改。
 
 
@@ -108,13 +110,19 @@
 
 #### nextStep(非必须):
 
-选中建议词后,建议框消失,之后点击回车要执行的函数。
+选中建议词后,建议框消失,之后点击回车要执行的函数
 
 #### immediate(非必须)
 
 是否鼠标选中后或者键盘选中回车后立刻执行nextStep操作, 默认 `false` ,即选中后,所选项将会填充到输入框中,需要再次回车执行nextStep操作
 
 #### extra(非必须): 
+
+#### dataCallback(非必须):
+如果服务端返回数据不满足展示需求,可以自行进行转换,之后在onSelect中进行数据的还原
+
+#### onSelect(非必须):
+记录最后选择的jquery对象
 
 除了queryParam之外的其他参数. 使用: 
 
@@ -174,5 +182,7 @@
         }
     });
 
+
+感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献.
 
 有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流
