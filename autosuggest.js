@@ -138,10 +138,10 @@
                                 if (settings.highlight) {
                                     var matchText = getRealQuery(query);
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '" data-label="'
-                                    + j.label + '">' + getStrongText(j.label, matchText) + '</span>';
+                                    + j.label + '">' + getStrongText(j.value, matchText) + '</span>';
                                 } else {
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '"  data-label="'
-                                    + j.label + '">' + j.label + '</span>';
+                                    + j.value + '">' + j.label + '</span>';
                                 }
                                 suggestionsNum++;
                             }
