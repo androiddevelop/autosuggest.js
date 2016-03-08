@@ -11,6 +11,9 @@
 5. **增加回车触发函数(nextStep)**
 6. **增加以分隔符分割的联想(split)**
 7. **增加匹配高亮(highlight)**
+8. **增加接口端数据格式化方法已适应插件内部格式(dataCallback)**
+9. **增加选中项方法，返回选中项jquery对象(onSelect)**
+10. **内部字段增加value值，选中项调整为value值不再是label**
 
 ### 依赖
 
@@ -21,6 +24,25 @@
 ### 基本使用
 
 	$('#input').autosuggest({url:'/search.php'});
+	
+	$('[name="pageTag"]').autosuggest({
+                url: 'search',
+                queryParamName: 'pageTag',
+                dataCallback:function(data) {
+                    var json = [];
+                    if (data.S === 10006) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            json.push({ value: data.list[i].TagName, label: data.list[i].GroupName + '=>' + data.list[i].TagName });
+                        }
+                        return  json;
+                    } 
+                    return json;
+                },
+                onSelect:function(elm) {
+                    var labelArr = elm.data('label').split('=>');
+                    $('[name="pageGroup"]').val(labelArr[0]);
+                }
+            });
 	
 ### json数据格式(必须)
 
