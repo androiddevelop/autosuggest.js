@@ -1,66 +1,66 @@
 [
   {
     "id": 1,
-    "label": "beijing"
+    "value": "beijing"
   },
   {
     "id": 2,
-    "label": "shanghai"
+    "value": "shanghai"
   },
   {
     "id": 3,
-    "label": "hangzhou"
+    "value": "hangzhou"
   },
   {
     "id": 4,
-    "label": "guangzhou"
+    "value": "guangzhou"
   },
   {
     "id": 5,
-    "label": "zhengzhou"
+    "value": "zhengzhou"
   },
   {
     "id": 6,
-    "label": "shenzhen"
+    "value": "shenzhen"
   },
   {
     "id": 7,
-    "label": "hefei"
+    "value": "hefei"
   },
   {
     "id": 8,
-    "label": "suzhou"
+    "value": "suzhou"
   },
   {
     "id": 9,
-    "label": "nanjing"
+    "value": "nanjing"
   },
   {
     "id": 10,
-    "label": "wuxi"
+    "value": "wuxi"
   },
   {
     "id": 11,
-    "label": "ningxia"
+    "value": "ningxia"
   },
   {
     "id": 12,
-    "label": "heilongjiang"
+    "value": "heilongjiang"
   },
   {
     "id": 13,
-    "label": "dalian"
+    "value": "dalian"
   },
   {
     "id": 14,
-    "label": "wuxi"
+    "value": "wuxi"
   },
   {
     "id": 15,
-    "label": "qinghai"
+    "value": "qinghai"
   },
   {
     "id": 16,
-    "label": "xian"
+    "value": "xian"
   }
 ]
