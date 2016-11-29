@@ -142,9 +142,9 @@
         <div class="as-menu list-group" style="display: none;">
             <span href="#" class="list-group-item  as-align-left" data-id="1" data-label="beijing">beijing</span>
             <span href="#" class="list-group-item  as-align-left" data-id="2" data-label="shanghai">shanghai</span>
-            <span href="#" class="list-group-item  as-align-left " data-id="3" data-label="hangzhou">hangzhou</span>
-            <span href="#" class="list-group-item  as-align-left " data-id="4" data-label="guangzhou">guangzhou</span>
-            <span href="#" class="list-group-item  as-align-left " data-id="5" data-label="zhengzhou">zhengzhou</span>
+            <span href="#" class="list-group-item  as-align-left" data-id="3" data-label="hangzhou">hangzhou</span>
+            <span href="#" class="list-group-item  as-align-left" data-id="4" data-label="guangzhou">guangzhou</span>
+            <span href="#" class="list-group-item  as-align-left" data-id="5" data-label="zhengzhou">zhengzhou</span>
         </div>
     </div>
 	   
