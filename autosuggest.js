@@ -25,6 +25,7 @@
             close: null,
             immediate: false,
             data: null,
+            firstSelected: false, //第一个被选中
             dataCallback: null, //接口数据转换方法
             dataType: 'json',
             onSelect: null //选中项方法，返回选中项jQuery对象
@@ -163,6 +164,13 @@
                         $(that).unbind("keydown");
                         $(".as-selected").removeClass("as-selected");
                         var upDownOperate = false;  //has up or down operate
+
+                        if(settings.firstSelected){
+                            selectIndex = (selectIndex + 1) % suggestionsNum;
+                            $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
+                            upDownOperate = true;
+                        }
+                        
                         $(that).keydown(function (event) {
                             var keyCode = event.keyCode;
 

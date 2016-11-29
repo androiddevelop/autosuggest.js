@@ -14,6 +14,7 @@
 8. **增加接口端数据格式化方法已适应插件内部格式(dataCallback)**
 9. **增加选中项方法，返回选中项jquery对象(onSelect)**
 10. **内部字段增加value值，选中项调整为value值不再是label**
+11. **增加第一个item是否默认被选中操作(firstSelected)**
 
 ### 依赖
 
@@ -23,11 +24,14 @@
 
 ### 基本使用
 
+	//示例1
 	$('#input').autosuggest({url:'/search.php'});
 	
+	//示例2
 	$('[name="pageTag"]').autosuggest({
                 url: 'search',
                 queryParamName: 'pageTag',
+                firstSelected: true,
                 dataCallback:function(data) {
                     var json = [];
                     if (data.S === 10006) {
@@ -76,6 +80,9 @@
  
 #### align(非必须):
 对齐方式,默认左对齐,可选项 `left` , `center` , `right`
+
+#### firstSelected(非必须):
+第一个是否默认被选中，默认false
 
 #### wrapperClass(非必须):
 
@@ -182,6 +189,16 @@
         }
     });
 
+
+## 更新日志
+
+#### v1.0.1
+  
+- 增加第一项是否被选中功能(firstSelected)
+
+#### v1.0.0
+
+- 完成初版`autosuggest`
 
 感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献.
 
