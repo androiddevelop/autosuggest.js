@@ -192,14 +192,18 @@
 
 ## 更新日志
 
+#### v1.0.2
+
+- 修正未高亮时数据填充问题。
+
 #### v1.0.1
   
-- 增加第一项是否被选中功能(firstSelected)
+- 增加第一项是否被选中功能(firstSelected)。
 
 #### v1.0.0
 
 - 完成初版`autosuggest`
 
-感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献.
+感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献。s
 
-有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流
+有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流。
