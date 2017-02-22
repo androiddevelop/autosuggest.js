@@ -210,7 +210,7 @@
                                     closeComponent($(that).next('.' + settings.menuClass));
 
                                     if (settings.immediate && settings.nextStep != null) {
-                                        settings.nextStep();
+                                        settings.nextStep($(".as-selected"));
                                     } else {
                                         upDownOperate = false;
                                     }
@@ -218,7 +218,7 @@
                                 } else {
                                     if (settings.nextStep != null && $(that).val().length > 0) {
                                         closeComponent($(that).next('.' + settings.menuClass));
-                                        settings.nextStep();
+                                        settings.nextStep($(".as-selected"));
                                         //防止多余请求
                                         xhr.abort();
                                     }
@@ -270,7 +270,7 @@
             $(that).focus();
 
             if (settings.immediate && settings.nextStep != null) {
-                settings.nextStep();
+                settings.nextStep($(".as-selected"));
             }
             settings.onSelect && settings.onSelect($(this));
             return false;
@@ -309,19 +309,21 @@
             var textTmp = text;
             var result = "";
             var length = matchText.length;
-            text = text.toLowerCase();
-            matchText = matchText.toLowerCase();
-            var index = text.indexOf(matchText, searchStartPosition);
-            while (index != -1) {
-                result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
-                searchStartPosition = index + length;
-                index = textTmp.indexOf(matchText, searchStartPosition);
+            if (text != undefined && matchText != undefined) {
+                text = text.toLowerCase();
+                matchText = matchText.toLowerCase();
+                var index = text.indexOf(matchText, searchStartPosition);
+                while (index != -1) {
+                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
+                    searchStartPosition = index + length;
+                    index = textTmp.indexOf(matchText, searchStartPosition);
+                }
+                result = result + textTmp.substring(searchStartPosition);
             }
-            result = result + textTmp.substring(searchStartPosition);
             return result;
         }
 
         return this;
     };
 
-} (jQuery));
+}(jQuery));

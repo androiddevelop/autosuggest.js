@@ -177,8 +177,8 @@
             "key1": "value1",
             "key2": "value2"
         },
-        nextStep: function () {
-            alert("test");
+        nextStep: function (selectedElement) {
+            alert(selectedElement.data('value'));
         },
         split: ' ',
         open: function(){
