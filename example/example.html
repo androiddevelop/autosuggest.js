@@ -34,8 +34,9 @@
             highlight: true,
             immediate: true,
             queryParamName: 'city',
-            nextStep: function () {
-                alert("hello world!");
+            nextStep: function (ele) {
+//                alert("hello world!");
+                alert(ele.data('value'));
             },
             split: ' ',
             open: function(){
