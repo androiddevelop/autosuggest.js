@@ -142,7 +142,7 @@
                                     + j.label + '">' + getStrongText(j.value, matchText) + '</span>';
                                 } else {
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '"  data-label="'
-                                    + j.value + '">' + j.label + '</span>';
+                                    + j.label + '">' + j.value + '</span>';
                                 }
                                 suggestionsNum++;
                             }
@@ -258,7 +258,6 @@
                 }
             }
         }
-
 
         //do something after select menu
         function selectResult() {
