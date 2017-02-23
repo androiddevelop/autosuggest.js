@@ -309,17 +309,18 @@
             var textTmp = text;
             var result = "";
             var length = matchText.length;
-            if (text != undefined && matchText != undefined) {
-                text = text.toLowerCase();
-                matchText = matchText.toLowerCase();
-                var index = text.indexOf(matchText, searchStartPosition);
-                while (index != -1) {
-                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
-                    searchStartPosition = index + length;
-                    index = textTmp.indexOf(matchText, searchStartPosition);
-                }
-                result = result + textTmp.substring(searchStartPosition);
+            if (text == undefined && matchText == undefined) {
+                return text;
             }
+            text = text.toLowerCase();
+            matchText = matchText.toLowerCase();
+            var index = text.indexOf(matchText, searchStartPosition);
+            while (index != -1) {
+                result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
+                searchStartPosition = index + length;
+                index = textTmp.indexOf(matchText, searchStartPosition);
+            }
+            result = result + textTmp.substring(searchStartPosition);
             return result;
         }
 
