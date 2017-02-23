@@ -139,10 +139,10 @@
                                 if (settings.highlight) {
                                     var matchText = getRealQuery(query);
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '" data-label="'
-                                    + j.label + '">' + getStrongText(j.value, matchText) + '</span>';
+                                        + j.label + '">' + getStrongText(j.value, matchText) + '</span>';
                                 } else {
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '"  data-label="'
-                                    + j.label + '">' + j.value + '</span>';
+                                        + j.label + '">' + j.value + '</span>';
                                 }
                                 suggestionsNum++;
                             }
@@ -165,12 +165,12 @@
                         $(".as-selected").removeClass("as-selected");
                         var upDownOperate = false;  //has up or down operate
 
-                        if(settings.firstSelected){
+                        if (settings.firstSelected) {
                             selectIndex = (selectIndex + 1) % suggestionsNum;
                             $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
                             upDownOperate = true;
                         }
-                        
+
                         $(that).keydown(function (event) {
                             var keyCode = event.keyCode;
 
@@ -305,21 +305,25 @@
 
         //对文本加入高亮操作
         function getStrongText(text, matchText) {
+            if (text == undefined) {
+                return "";
+            }
+            if (matchText == undefined) {
+                return text;
+            }
             var searchStartPosition = 0;
             var textTmp = text;
             var result = "";
             var length = matchText.length;
-            if (text != undefined && matchText != undefined) {
-                text = text.toLowerCase();
-                matchText = matchText.toLowerCase();
-                var index = text.indexOf(matchText, searchStartPosition);
-                while (index != -1) {
-                    result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
-                    searchStartPosition = index + length;
-                    index = textTmp.indexOf(matchText, searchStartPosition);
-                }
-                result = result + textTmp.substring(searchStartPosition);
-            }
+            text = text.toLowerCase();
+            matchText = matchText.toLowerCase();
+            var index = text.indexOf(matchText, searchStartPosition);
+            while (index != -1) {
+                result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
+                searchStartPosition = index + length;
+                index = textTmp.indexOf(matchText, searchStartPosition);
+            }s
+            result = result + textTmp.substring(searchStartPosition);
             return result;
         }
 
