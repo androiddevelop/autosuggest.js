@@ -322,7 +322,7 @@
                 result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
                 searchStartPosition = index + length;
                 index = textTmp.indexOf(matchText, searchStartPosition);
-            }s
+            }
             result = result + textTmp.substring(searchStartPosition);
             return result;
         }
