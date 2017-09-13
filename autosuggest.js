@@ -168,7 +168,9 @@
                         if (settings.firstSelected) {
                             selectIndex = (selectIndex + 1) % suggestionsNum;
                             $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
-                            upDownOperate = true;
+                            if (suggestionsNum > 0) {
+                                upDownOperate = true;
+                            }
                         }
 
                         $(that).keydown(function (event) {
@@ -183,7 +185,9 @@
                                 $(".as-selected").removeClass("as-selected");
                                 selectIndex = (selectIndex + suggestionsNum - 1) % suggestionsNum;
                                 $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
-                                upDownOperate = true;
+                                if (suggestionsNum > 0) {
+                                    upDownOperate = true;
+                                }
 
                                 //阻止光标移至输入框最前面
                                 event.preventDefault();
@@ -195,7 +199,9 @@
                                 $(".as-selected").removeClass("as-selected");
                                 selectIndex = (selectIndex + 1) % suggestionsNum;
                                 $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
-                                upDownOperate = true;
+                                if (suggestionsNum > 0) {
+                                    upDownOperate = true;
+                                }
                                 return;
                             }
 
