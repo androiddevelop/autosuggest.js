@@ -218,8 +218,6 @@ autosuggest.js
 
 感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献。
 
-有任何问题,欢迎发送邮件到[app@codeboy.me](mailto:app@codeboy.me)交流。
-
 ## License
 
 ```
