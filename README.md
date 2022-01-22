@@ -175,7 +175,6 @@ autosuggest.js
         queryParamName: 'search'
         method: 'post',
         highlight: true,
-        queryParamName: 'search',
         extra: {
             "key1": "value1",
             "key2": "value2"
