@@ -3,7 +3,8 @@ autosuggest.js
 
 #### **适用于Bootstrap的Ajax输入建议控件([Demo](https://example.codeboy.me/autosuggest/index.html))**
 
-![](https://img.shields.io/badge/release-v1.0.4-519dd9.svg)
+![](https://img.shields.io/github/package-json/v/zhengmz/autosuggest.js)
+![](https://img.shields.io/npm/v/jquery-autosuggest)
 
 在[bootcomplete.js](https://github.com/getwebhelp/bootcomplete.js)的基础上大幅度改进，改动如下:
 

@@ -1,6 +1,6 @@
 {
   "name": "jquery-autosuggest",
-  "version": "1.0.5",
+  "version": "1.0.5-1",
   "description": "AJAX auto-suggest for Bootstrap 3",
   "main": "autosuggest.js",
   "maintainers": [

@@ -1,8 +1,9 @@
 /*
- * @name jQuery.auto-suggest
+ * @name jQuery.autosuggest
  * @projectDescription AJAX auto-suggest for Bootstrap 3
- * @author  | https://github.com/androiddevelop/auto-suggest
- * @version 1.0
+ * @author  | https://github.com/androiddevelop/autosuggest.js
+ * @url  | https://github.com/zhengmz/autosuggest.js
+ * @version 1.0.5-1
  * @license Apache License
  *
  */
