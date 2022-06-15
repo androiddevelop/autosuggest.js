@@ -13,7 +13,11 @@
             method: 'get',
             wrapperClass: "as-wrapper",
             menuClass: "as-menu",
-            minLength: 2,
+            menuClassStyle :{
+                "overflow-y": "auto",
+                "height": "150px"
+            },
+            minLength: 1,
             maxNum: 10,
             align: "left",
             queryParamName: 'query',
@@ -28,7 +32,8 @@
             firstSelected: false, //第一个被选中
             dataCallback: null, //接口数据转换方法
             dataType: 'json',
-            onSelect: null //选中项方法，返回选中项jQuery对象
+            onSelect: null ,//选中项方法，返回选中项jQuery对象
+            selectAdd: false //是否追加到输入框 weixiang add 2018年1月15日 16:26:18
         };
 
         var settings = $.extend({}, defaults, options);
@@ -49,7 +54,9 @@
         }
 
         $(".as-menu").css("top", $(that).outerHeight());
-
+        for (var ky in settings.menuClassStyle){
+          $(".as-menu").css(ky, settings.menuClassStyle[ky]);
+        }
         var lastText = "";
 
         var lock = false;
@@ -65,8 +72,7 @@
             }
 
             lastText = query;
-
-            if (query == null) {
+            if (query == null && settings.minLength != 0) {
                 closeComponent($(that).next('.' + settings.menuClass));
                 return;
             }
@@ -84,6 +90,13 @@
 
             searchQuery();
 
+        }
+
+
+        if (settings.dbClick){
+            $(this).dblclick(function(){
+                searchQuery();
+            });
         }
 
         //hide auto-suggest component when lose focus
@@ -211,7 +224,11 @@
                                 if (upDownOperate) {
                                     lock = true;
                                     lastText = getRealText($(".as-selected").data('value'));
-                                    $(that).val(lastText);
+                                    if (settings.selectAdd){
+                                      $(that).val($(that).val() + lastText);
+                                    } else {
+                                      $(that).val(lastText);
+                                    }
                                     lock = false;
                                     closeComponent($(that).next('.' + settings.menuClass));
 
@@ -269,7 +286,11 @@
         function selectResult() {
             lock = true;
             lastText = getRealText($(this).data('value'));
-            $(that).val(lastText);
+            if (settings.selectAdd){
+              $(that).val($(that).val() + lastText);
+            } else {
+              $(that).val(lastText);
+            }
             lock = false;
 
             closeComponent($(that).next('.' + settings.menuClass));
@@ -314,7 +335,7 @@
             if (text == undefined) {
                 return "";
             }
-            if (matchText == undefined) {
+            if (matchText == undefined || matchText == '') {
                 return text;
             }
             var searchStartPosition = 0;
