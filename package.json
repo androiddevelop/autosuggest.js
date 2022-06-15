@@ -2,18 +2,31 @@
   "name": "auto-suggest",
   "version": "1.0.4",
   "description": "AJAX auto-suggest for Bootstrap 3",
+  "main": "autosuggest.js",
   "maintainers": [
     {
       "name": "androiddevelop",
       "email": "app@codeboy.me"
+    },
+    {
+      "name": "zhengmz",
+      "url": "https://github.com/zhengmz"
     }
   ],
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build:js": "npx uglifyjs autosuggest.js --compress --mangle --ie -o autosuggest.min.js",
+    "build:css": "npx cleancss -o autosuggest.min.css autosuggest.css",
+    "build": "npm run build:js && npm run build:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/androiddevelop/autosuggest.js.git"
+    "url": "https://github.com/zhengmz/autosuggest.js.git"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "clean-css-cli": "^5.6.0",
+    "uglify-js": "^3.16.0"
+  }
 }
