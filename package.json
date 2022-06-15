@@ -1,0 +1,19 @@
+{
+  "name": "auto-suggest",
+  "version": "1.0.4",
+  "description": "AJAX auto-suggest for Bootstrap 3",
+  "maintainers": [
+    {
+      "name": "androiddevelop",
+      "email": "app@codeboy.me"
+    }
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/androiddevelop/autosuggest.js.git"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
