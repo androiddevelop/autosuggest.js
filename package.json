@@ -1,5 +1,5 @@
 {
-  "name": "auto-suggest",
+  "name": "jquery-autosuggest",
   "version": "1.0.4",
   "description": "AJAX auto-suggest for Bootstrap 3",
   "main": "autosuggest.js",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhengmz/autosuggest.js.git"
+    "url": "git+https://github.com/zhengmz/autosuggest.js.git"
   },
   "dependencies": {},
   "devDependencies": {
