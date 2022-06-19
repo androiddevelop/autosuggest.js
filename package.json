@@ -1,0 +1,25 @@
+{
+  "name": "bootstrap-autosuggest",
+  "version": "1.1.1",
+  "main": "src/index.js",
+  "description": "auto-suggest for bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/androiddevelop/autosuggest.js.git"
+  },
+  "keywords": [
+    "auto-suggest",
+    "suggest",
+    "input",
+    "bootstrap"
+  ],
+  "author": "yuedong.li (app@codeboy.me)",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/androiddevelop/autosuggest/issues"
+  },
+  "homepage": "https://www.codeboy.me",
+  "dependencies": {
+    "jquery": ">1.0.0"
+  }
+}

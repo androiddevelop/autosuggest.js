@@ -1,14 +1,13 @@
 /*
  * @name jQuery.auto-suggest
- * @projectDescription AJAX auto-suggest for Bootstrap 3
- * @author  | https://github.com/androiddevelop/auto-suggest
- * @version 1.0
+ * @projectDescription AJAX auto-suggest for Bootstrap
+ * @author | https://github.com/androiddevelop/auto-suggest
+ * @version 1.1.1
  * @license Apache License
- *
  */
 (function ($) {
     $.fn.autosuggest = function (options) {
-        var defaults = {
+        const defaults = {
             url: "/search",
             method: 'get',
             wrapperClass: "as-wrapper",
@@ -31,36 +30,33 @@
             onSelect: null //选中项方法，返回选中项jQuery对象
         };
 
-        var settings = $.extend({}, defaults, options);
+        const settings = $.extend({}, defaults, options);
 
         $(this).attr('autocomplete', 'off');
         $(this).wrap('<div class="' + settings.wrapperClass + '"></div>');
 
         $('<div class="' + settings.menuClass + ' list-group"></div>').insertAfter($(this));
 
-        var xhr;
-        var that = $(this);
+        let xhr;
+        const that = $(this);
 
-        var alignClass = ' as-align-left';
-        if (settings.align == 'center') {
+        let alignClass = ' as-align-left';
+        if (settings.align === 'center') {
             alignClass = ' as-align-center';
-        } else if (settings.align == 'right') {
+        } else if (settings.align === 'right') {
             alignClass = ' as-align-right';
         }
 
         $(".as-menu").css("top", $(that).outerHeight());
-
-        var lastText = "";
-
-        var lock = false;
+        let lastText = "";
+        let lock = false;
 
         setInterval(checkInput, 200);
 
-
         //检测输入
         function checkInput() {
-            var query = $(that).val();
-            if (lock || query == lastText) {
+            const query = $(that).val();
+            if (lock || query === lastText) {
                 return;
             }
 
@@ -77,13 +73,12 @@
             }
 
             //处理分隔符,分隔符为最后一个字符时,隐藏建议框
-            if (settings.split != null && query.charAt(query.length - 1) == settings.split) {
+            if (settings.split != null && query.charAt(query.length - 1) === settings.split) {
                 $(that).next('.' + settings.menuClass).html('');
                 closeComponent($(that).next('.' + settings.menuClass));
             }
 
             searchQuery();
-
         }
 
         //hide auto-suggest component when lose focus
@@ -95,14 +90,13 @@
 
         //查询
         function searchQuery() {
-            var query = $(that).val();
-
-            var queryName = settings.queryParamName;
+            let query = $(that).val();
+            const queryName = settings.queryParamName;
 
             //是否进行多词提示
             query = getRealQuery(query);
 
-            var data = {};
+            const data = {};
             data[queryName] = query;
 
             $.each(settings.extra, function (k, v) {
@@ -116,7 +110,7 @@
 
             if (query.length >= settings.minLength) {
 
-                if (xhr && xhr.readyState != 4) {
+                if (xhr && xhr.readyState !== 4) {
                     xhr.abort();
                 }
 
@@ -127,17 +121,17 @@
                     dataType: settings.dataType,
                     success: function (json) {
                         if (settings.dataCallback) {
-                            json = settings.data = settings.dataCallback(json);
+                            json = settings.dataCallback(json);
                         }
-                        var results = '';
+                        let results = '';
 
-                        var selectIndex = -1;
-                        var suggestionsNum = 0;
+                        let selectIndex = -1;
+                        let suggestionsNum = 0;
 
                         $.each(json, function (i, j) {
                             if (settings.maxNum > i) {
                                 if (settings.highlight) {
-                                    var matchText = getRealQuery(query);
+                                    const matchText = getRealQuery(query);
                                     results += '<span href="javascript:void(0)" class="list-group-item ' + alignClass + '" data-id="' + j.id + '" data-value="' + j.value + '" data-label="'
                                         + j.label + '">' + getStrongText(j.value, matchText) + '</span>';
                                 } else {
@@ -148,8 +142,9 @@
                             }
                         });
 
-                        $(that).next('.' + settings.menuClass).html(results);
-                        $(that).next('.' + settings.menuClass).children().on("click", selectResult);
+                        let ele = $(that).next('.' + settings.menuClass);
+                        ele.html(results);
+                        ele.children().on("click", selectResult);
 
                         //do not show when lose focus
                         if ($(that).is(":focus")) {
@@ -157,13 +152,13 @@
                         }
 
                         //close component when there is no data.
-                        if (suggestionsNum == 0 && $(that).next('.' + settings.menuClass).is(':visible') && settings.close != null) {
+                        if (suggestionsNum === 0 && $(that).next('.' + settings.menuClass).is(':visible') && settings.close != null) {
                             closeComponent($(that).next('.' + settings.menuClass));
                         }
 
                         $(that).unbind("keydown");
                         $(".as-selected").removeClass("as-selected");
-                        var upDownOperate = false;  //has up or down operate
+                        let upDownOperate = false;  //has up or down operate
 
                         if (settings.firstSelected) {
                             selectIndex = (selectIndex + 1) % suggestionsNum;
@@ -174,14 +169,14 @@
                         }
 
                         $(that).keydown(function (event) {
-                            var keyCode = event.keyCode;
+                            const keyCode = event.keyCode;
 
-                            if ($(that).next('.' + settings.menuClass).css("display") == 'none' && keyCode != 13) {
+                            if ($(that).next('.' + settings.menuClass).css("display") === 'none' && keyCode !== 13) {
                                 return;
                             }
 
                             //up arrow
-                            if (keyCode == 38) {
+                            if (keyCode === 38) {
                                 $(".as-selected").removeClass("as-selected");
                                 selectIndex = (selectIndex + suggestionsNum - 1) % suggestionsNum;
                                 $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
@@ -195,7 +190,7 @@
                             }
 
                             //down arrow
-                            if (keyCode == 40) {
+                            if (keyCode === 40) {
                                 $(".as-selected").removeClass("as-selected");
                                 selectIndex = (selectIndex + 1) % suggestionsNum;
                                 $(that).next('.' + settings.menuClass).children().eq(selectIndex).addClass("as-selected");
@@ -206,7 +201,7 @@
                             }
 
                             //enter
-                            if (keyCode == 13) {
+                            if (keyCode === 13) {
                                 //suggestion component is visible after the operation up and down arrows
                                 if (upDownOperate) {
                                     lock = true;
@@ -289,10 +284,10 @@
                 return selectedValue;
             }
 
-            var query = $(that).val();
-            var result = selectedValue;
-            var index = query.lastIndexOf(settings.split);
-            if (index != -1) {
+            const query = $(that).val();
+            let result = selectedValue;
+            const index = query.lastIndexOf(settings.split);
+            if (index !== -1) {
                 result = query.substring(0, index) + settings.split + selectedValue;
             }
             return result;
@@ -301,8 +296,8 @@
         //获取真实查询内容
         function getRealQuery(query) {
             if (settings.split != null) {
-                var index = query.lastIndexOf(settings.split);
-                if (index != -1) {
+                const index = query.lastIndexOf(settings.split);
+                if (index !== -1) {
                     query = query.substring(index + settings.split.length);
                 }
             }
@@ -311,20 +306,20 @@
 
         //对文本加入高亮操作
         function getStrongText(text, matchText) {
-            if (text == undefined) {
+            if (text === undefined) {
                 return "";
             }
-            if (matchText == undefined) {
+            if (matchText === undefined) {
                 return text;
             }
-            var searchStartPosition = 0;
-            var textTmp = text;
-            var result = "";
-            var length = matchText.length;
+            let searchStartPosition = 0;
+            const textTmp = text;
+            let result = "";
+            const length = matchText.length;
             text = text.toLowerCase();
             matchText = matchText.toLowerCase();
-            var index = text.indexOf(matchText, searchStartPosition);
-            while (index != -1) {
+            let index = text.indexOf(matchText, searchStartPosition);
+            while (-1 !== index) {
                 result = result + textTmp.substring(searchStartPosition, index) + "<strong>" + textTmp.substr(index, length) + "</strong>";
                 searchStartPosition = index + length;
                 index = textTmp.indexOf(matchText, searchStartPosition);

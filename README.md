@@ -3,7 +3,7 @@ autosuggest.js
 
 #### **适用于Bootstrap的Ajax输入建议控件([Demo](https://example.codeboy.me/autosuggest/index.html))**
 
-![](https://img.shields.io/badge/release-v1.0.4-519dd9.svg)
+![](https://img.shields.io/badge/release-v1.1.1-519dd9.svg)
 
 在[bootcomplete.js](https://github.com/getwebhelp/bootcomplete.js)的基础上大幅度改进，改动如下:
 
@@ -24,33 +24,51 @@ autosuggest.js
 - [jQuery](https://jquery.com/download/)(>=1.0)
 - [Bootstrap](http://getbootstrap.com/getting-started/)(>=3.0)
 
+## 引入
+
+#### 普通模式
+
+```html
+<link rel="stylesheet" href="https://raw.githubusercontent.com/androiddevelop/autosuggest.js/master/dist/autosuggest.min.css">
+<script src="https://raw.githubusercontent.com/androiddevelop/autosuggest.js/master/dist/jquery.autosuggest.min.js"></script>
+```
+
+#### npm模式
+```bash
+npm install bootstrap-autosuggest
+```
 
 ### 基本使用
 
-	//示例1
-	$('#input').autosuggest({url:'/search.php'});
+```javascript
+//示例1
+$('#input').autosuggest({url:'/search.php'});
+
+//示例2
+$('#input').autosuggest({
+            url: 'search',
+            queryParamName: 'pageTag',
+            firstSelected: true,
+            dataCallback:function(data) {
+                var json = [];
+                if (data.S === 10006) {
+                    for (var i = 0; i < data.list.length; i++) {
+                        json.push({ value: data.list[i].TagName, label: data.list[i].GroupName + '=>' + data.list[i].TagName });
+                    }
+                    return  json;
+                } 
+                return json;
+            },
+            onSelect:function(elm) {
+                var labelArr = elm.data('label').split('=>');
+                $('[name="pageGroup"]').val(labelArr[0]);
+            }
+        });
+```
 	
-	//示例2
-	$('[name="pageTag"]').autosuggest({
-                url: 'search',
-                queryParamName: 'pageTag',
-                firstSelected: true,
-                dataCallback:function(data) {
-                    var json = [];
-                    if (data.S === 10006) {
-                        for (var i = 0; i < data.list.length; i++) {
-                            json.push({ value: data.list[i].TagName, label: data.list[i].GroupName + '=>' + data.list[i].TagName });
-                        }
-                        return  json;
-                    } 
-                    return json;
-                },
-                onSelect:function(elm) {
-                    var labelArr = elm.data('label').split('=>');
-                    $('[name="pageGroup"]').val(labelArr[0]);
-                }
-            });
-	
+1. 普通模式参见[Demo](https://example.codeboy.me/autosuggest/index.html)
+2. npm模式参见项目中example中示例
+
 ### json数据格式(必须)
 
 	[ 
@@ -62,9 +80,9 @@ autosuggest.js
 	]
 
 
-> id可以是任意值
-> label不是必须项,仅仅做个标示
-> 如果服务端返回数据非此种格式，请修改。
+> id和label可以是任意值，不是必须项，这两个值可以用作元素选中后的额外属性值使用
+> 
+> 如果服务端返回数据非此种格式，可以使用dataCallback参数进行转换
 
 
 ### 参数
@@ -132,9 +150,9 @@ autosuggest.js
 如果服务端返回数据不满足展示需求,可以自行进行转换,之后在onSelect中进行数据的还原
 
 #### onSelect(非必须):
-记录最后选择的jquery对象
+记录最后选择的jquery对象，可以从该对象上获取 `data-id` 、 `data-label` 和 `data-value`属性
 
-除了queryParam之外的其他参数. 使用: 
+除了queryParam之外的其他参数， 使用: 
 
 	 "key1" : "value1",
 	 "key2" : "value2"
@@ -188,12 +206,18 @@ autosuggest.js
         },
         close: function(){
             console.log("start close");
+        },
+        dataCallback: function(serverData){
+            
         }
     });
 
 
 ## 更新日志
 
+#### v1.1.1
+
+- 提供npm模式使用。
 
 #### v1.0.4
 
@@ -215,7 +239,7 @@ autosuggest.js
 
 - 完成初版`autosuggest`
 
-感谢[aofong](https://github.com/aofong)为auto-suggest做出的贡献。
+感谢 [aofong](https://github.com/aofong)为auto-suggest做出的贡献。
 
 ## License
 
